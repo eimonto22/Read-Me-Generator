@@ -66,3 +66,17 @@ const questions = [
         message: "Provide a walkthrough of required test if applicable.",
     },
 ];
+
+// This initializes the app
+function init () {
+    inquirer.createPromptModule(questions).then((responses) => {
+        console.log("Creating Professional Read.md File..");
+        writeToFile("./dist/ReadE.md", generateMarkdown({...responses}));
+    }); 
+}
+init();
+
+// writes the readme.md file
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
