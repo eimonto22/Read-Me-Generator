@@ -2,7 +2,7 @@
 const fs = require ("fs");
 const inquirer = require ("inquirer");
 const path = require ("path");
-const generateMarkdown = require ("./utils/generateMardown")
+const generateMarkdown = require ("./utils/generateMarkdown")
 
 //Creates an array of questions for the readme that the user inputs
 
@@ -69,12 +69,13 @@ const questions = [
 
 // This initializes the app
 function init () {
-    inquirer.createPromptModule(questions).then((responses) => {
+    const response = inquirer.prompt(questions).then(responses => {
         console.log("Creating Professional Read.md File..");
         writeToFile("./dist/ReadE.md", generateMarkdown({...responses}));
-    }); 
-}
-init();
+        });
+        
+    }; 
+    init();
 
 // writes the readme.md file
 function writeToFile(fileName, data) {
